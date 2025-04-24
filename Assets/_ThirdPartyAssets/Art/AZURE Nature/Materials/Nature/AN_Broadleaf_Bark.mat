@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AN_Broadleaf_Bark
   m_Shader: {fileID: 4800000, guid: c61194769c49566439e564fcdf2deff8, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _COVERAGEOVERLAYTYPE_VERTEX_POSITION
   m_InvalidKeywords:
@@ -21,6 +23,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -204,3 +207,4 @@ Material:
     - _GroundColor: {r: 0.4811321, g: 0.36026713, b: 0.27006942, a: 0}
     - _SurfaceColor: {r: 0.59, g: 0.47439185, b: 0.40662158, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
