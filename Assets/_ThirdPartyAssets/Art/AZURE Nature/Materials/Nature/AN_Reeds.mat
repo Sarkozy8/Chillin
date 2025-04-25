@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: AN_Reeds
   m_Shader: {fileID: 4800000, guid: 0154318cd2c5a3747a66420b5d885dd5, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _COLOR2ENABLE_ON
   - _COLOR2OVERLAYTYPE_UV_BASED
@@ -23,6 +25,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -148,9 +151,9 @@ Material:
     - _UVSec: 0
     - _WIND: 1
     - _Wind: 1
-    - _WindForce: 0.15
-    - _WindSpeed: 0.15
-    - _WindWavesScale: 0.7
+    - _WindForce: 0.1
+    - _WindSpeed: 0.1
+    - _WindWavesScale: 0.5
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
@@ -159,3 +162,4 @@ Material:
     - _Color2: {r: 0.79235554, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
