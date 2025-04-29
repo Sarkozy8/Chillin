@@ -1,8 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
+//Notes: This is the script that goes with the player camera and
+//will send the raycast for the interacting system.
+
 public class Interactor : MonoBehaviour
 {
+
     public Transform InteractorSource;
     public float InteractRange;
 
