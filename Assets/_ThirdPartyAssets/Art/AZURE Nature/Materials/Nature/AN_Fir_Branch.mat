@@ -14,7 +14,8 @@ Material:
   m_ValidKeywords:
   - _COLOR2OVERLAYTYPE_VERTEX_POSITION_BASED
   - _FIXTHEBASEOFFOLIAGE_ON
-  - _SNOWOVERLAYTYPE_UV_BASED
+  - _SNOWOVERLAYTYPE_WORLD_NORMAL_BASED
+  - _SNOW_ON
   - _WIND_ON
   m_InvalidKeywords:
   - _COLOR2ENABLE1_ON
@@ -149,17 +150,17 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _SNOW: 0
+    - _SNOW: 1
     - _Smoothness: 0.07
     - _Smoothness1: 0
     - _SmoothnessTextureChannel: 0
     - _Snow: 0
     - _Snow1: 0
-    - _SnowAmount: 0.911
+    - _SnowAmount: 0.2
     - _SnowAmount1: 0.5
     - _SnowFade: 0.106
     - _SnowLevel: 0
-    - _SnowOverlayType: 1
+    - _SnowOverlayType: 0
     - _SnowTiling: 0.15
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -187,8 +188,8 @@ Material:
     - __dirty: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.13867459, g: 0.46099997, b: 0.27734926, a: 0}
-    - _Color2: {r: 0.15972927, g: 0.4433961, b: 0.044339456, a: 0}
+    - _Color1: {r: 0.13725494, g: 0.4627451, b: 0.17393705, a: 0}
+    - _Color2: {r: 0.4337398, g: 0.44313726, b: 0.04313725, a: 0}
     - _Color3: {r: 0, g: 0, b: 0, a: 0}
     - _CoverageColor: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

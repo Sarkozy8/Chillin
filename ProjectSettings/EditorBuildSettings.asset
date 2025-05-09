@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Chapter1_Autumn.unity
+    guid: 5da2cd232a8218f4395318931cd7dea7
+  - enabled: 1
+    path: Assets/Scenes/Chapter2_Winter.unity
+    guid: 004d45a0137f0384692210d2bf320be3
+  - enabled: 1
+    path: Assets/Scenes/Animal Sighting.unity
+    guid: 1912ef0fa8da1664894c64c92c657f09
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

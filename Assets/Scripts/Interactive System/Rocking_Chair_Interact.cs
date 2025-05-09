@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class Rocking_Chair_Interact : InteractBase
 {
@@ -10,6 +13,13 @@ public class Rocking_Chair_Interact : InteractBase
     public BoxCollider chairCollider;      // Used so the player doesnt collide with chair when interacting
     public MeshRenderer chairRender;       // Used so the player camera doesnt clip into the chair
 
+    public VideoPlayer videoPlayerTranstion;
+
+    private void Start()
+    {
+        videoPlayerTranstion.loopPointReached += ChangeScene;
+    }
+
     void Update()
     {
 
@@ -17,8 +27,8 @@ public class Rocking_Chair_Interact : InteractBase
         {
             // Used to avoid being stuck in interact
             // It's position here because of the hierarchy on the interact function
-
             canInteract = true;
+
         }
 
         if (areWeInteracting && areWeInteracting2 && Input.GetKeyDown(KeyCode.E))
@@ -40,7 +50,6 @@ public class Rocking_Chair_Interact : InteractBase
                 areWeInteracting2 = false;
 
                 chairCollider.enabled = true;
-
 
                 playerAnimator.enabled = false;
 
@@ -65,7 +74,8 @@ public class Rocking_Chair_Interact : InteractBase
 
     public override void Interact()
     {
-        if (areWeInteracting == false && canInteract == true) // Avoid getting stuck in interacting an object
+        // Avoid getting stuck in interacting an object and doesnt work in autumn (video transition)
+        if (areWeInteracting == false && canInteract == true && SceneManager.GetActiveScene().buildIndex != 0)
         {
 
             Debug.Log("Interact with Rocking Chair");
@@ -85,6 +95,23 @@ public class Rocking_Chair_Interact : InteractBase
             StartCoroutine(DisableChairRendererAndPLayMusic());
             Disappear_Key();
         }
+        else if (SceneManager.GetActiveScene().buildIndex == 0) // Lets you do the video transition in Autumn
+        {
+
+            // Used the sme blackoutWakeUp for fade in transition for video
+            StartCoroutine(DoTransition());
+            canvasAnimator.SetTrigger("fadeIn");
+
+        }
+    }
+
+    IEnumerator DoTransition()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        // Play video
+        videoPlayerTranstion.enabled = true;
+        videoPlayerTranstion.Play();
     }
 
     IEnumerator DisableChairRendererAndPLayMusic()
@@ -100,5 +127,9 @@ public class Rocking_Chair_Interact : InteractBase
 
     }
 
-
+    void ChangeScene(UnityEngine.Video.VideoPlayer vp)
+    {
+        // Load Winter Scene
+        SceneManager.LoadScene(1);
+    }
 }
