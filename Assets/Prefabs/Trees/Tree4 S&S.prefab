@@ -16,9 +16,21 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 4f83a510f86fb2748880d487f0dc980e, type: 2}
+    - target: {fileID: 3566422317877618684, guid: bbe70efb5b465c945a55365ca5245b0a, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3566422317877618684, guid: bbe70efb5b465c945a55365ca5245b0a, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3566422317877618684, guid: bbe70efb5b465c945a55365ca5245b0a, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4782707518191193687, guid: bbe70efb5b465c945a55365ca5245b0a, type: 3}
       propertyPath: m_Name
-      value: Tree4
+      value: Tree4 S&S
       objectReference: {fileID: 0}
     - target: {fileID: 5040502207043071084, guid: bbe70efb5b465c945a55365ca5245b0a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

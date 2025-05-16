@@ -17,6 +17,7 @@ public class ObjectiveManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Reset Brushing Objective for each day
         PlayerPrefs.SetInt("didIBrushToday", 0);
         StartCoroutine(DelayForBrushingTeethAfterWakingUp());
 
@@ -25,6 +26,9 @@ public class ObjectiveManager : MonoBehaviour
         {
             canvasInteractAnimator.SetTrigger("winterFadeOut");
         }
+
+        // Reset Crops count for spring
+        PlayerPrefs.SetInt("cropsHarvested", 0);
     }
 
     // Update is called once per frame

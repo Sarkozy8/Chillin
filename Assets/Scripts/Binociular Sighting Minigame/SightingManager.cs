@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SightingManager : MonoBehaviour
 {
+    public static SightingManager Instance { get; private set; }  // Static reference to the instance
+
     public int randomDeer = 5;
 
     public GameObject deer1;
@@ -12,17 +15,26 @@ public class SightingManager : MonoBehaviour
     public GameObject deer4;
     public GameObject deer5;
 
+    public Animator minigameAnimator;
+
+    // Ensures only one instance of SightingManager exists in the scene
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;  // Set the static reference to this instance
+        }
+        else
+        {
+            Destroy(gameObject);  // Destroy if there is already an instance
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //randomDeer = UnityEngine.Random.Range(1, 6);
+        randomDeer = UnityEngine.Random.Range(1, 6);
         StartCoroutine(DeerSelector());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     IEnumerator DeerSelector()
@@ -48,4 +60,19 @@ public class SightingManager : MonoBehaviour
                 break;
         }
     }
+
+    public static IEnumerator TriggerDeer()
+    {
+
+        Instance.minigameAnimator.SetTrigger("foundTheDeer");
+        Debug.Log("Tried");
+        yield return new WaitForSeconds(7);
+
+        Instance.minigameAnimator.SetTrigger("fadeOut");
+
+        yield return new WaitForSeconds(3);
+
+        SceneManager.LoadScene(3);
+    }
+
 }

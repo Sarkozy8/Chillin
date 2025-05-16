@@ -107,7 +107,8 @@ public class BinocularController : MonoBehaviour
             {
                 Debug.Log("5th Deer Found!");
                 found5thDeer = true;
-                // Deer 5 logic here!!!!
+
+                StartCoroutine(SightingManager.TriggerDeer());
             }
         }
 

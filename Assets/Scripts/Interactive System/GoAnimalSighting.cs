@@ -35,7 +35,7 @@ public class GoAnimalSighting : InteractBase
     IEnumerator LoadAnimalSighting()
     {
         canvasAnimator.SetTrigger("fadeIn");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         SceneManager.LoadScene(2);
     }
 }

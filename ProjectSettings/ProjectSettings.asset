@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Argos Game Studios
   productName: Chillin
   defaultCursor: {fileID: 2800000, guid: 512f876242c341b4499359b68ac70337, type: 3}
   cursorHotspot: {x: 0, y: 0}
