@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -125,11 +127,14 @@ public class FirstPersonController : MonoBehaviour
     public float bobSpeed = 10f;
     public Vector3 bobAmount = new Vector3(.15f, .05f, 0f);
 
+
     // Internal Variables
     private Vector3 jointOriginalPos;
     private float timer = 0;
 
     #endregion
+
+    private bool toggleStep = false; // Toggle for each steps (avoids playing multiple times)
 
     private void Awake()
     {
@@ -439,6 +444,42 @@ public class FirstPersonController : MonoBehaviour
         }
 
         #endregion
+
+
+        // Logic for footsteps
+        RaycastHit hit;
+
+        if (joint.localPosition.y < jointOriginalPos.y + 0.01f && toggleStep)
+        {
+            toggleStep = false;
+        }
+        else if (joint.localPosition.y > jointOriginalPos.y + 0.01f && !toggleStep)
+        {
+            toggleStep = true;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 5f))
+            {
+                if (hit.collider.CompareTag("Cabin"))
+                {
+                    SoundManager.PlayFXSound(AudioFXSounds.CabinStep);
+                }
+                else if (SceneManager.GetActiveScene().buildIndex == 0)
+                {
+                    SoundManager.PlayFXSound(AudioFXSounds.AutumnStep);
+                }
+                else if (SceneManager.GetActiveScene().buildIndex == 1)
+                {
+                    SoundManager.PlayFXSound(AudioFXSounds.WinterStep);
+                }
+                else
+                {
+                    SoundManager.PlayFXSound(AudioFXSounds.GrassStep);
+                }
+            }
+
+
+        }
+
     }
 
     // Sets isGrounded based on a raycast sent straigth down from the player object

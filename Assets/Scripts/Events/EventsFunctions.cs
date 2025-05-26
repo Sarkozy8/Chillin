@@ -3,6 +3,10 @@ using UnityEngine;
 
 public class EventsFunctions : MonoBehaviour
 {
+    /// <summary>
+    /// For the count down for brushing, this are the events use in the animator to count down the numbers.
+    /// </summary>
+
     public TextMeshProUGUI mainText; // Text on the middle, used for countdowns and telling you how you did in the minigame
 
     // Accumulation of functions to use on animations!

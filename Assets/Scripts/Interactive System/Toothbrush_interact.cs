@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using static UnityEngine.ParticleSystem;
 public class Toothbrush_interact : InteractBase
 {
@@ -11,11 +13,12 @@ public class Toothbrush_interact : InteractBase
     public float brushDuration = 15f;          // Seconds to make the minigame last
     private float movementScore = 0f;          // Score for minigame
     private float timer = 0f;                  // Retains how long has it past
-    private bool brushing = false;             // Self explanatory
     public float moveSpeed = 0.03f;            // Move Speed for toothbrush (0.03 is the best)
     private Vector3 lastMousePos;              // Last position of mouse used to calculate movement each frame+
 
     private bool countDownDone = false;        // Toggle to start the brushing minigame
+
+    public AudioSource brushingAudioSource;    // Audio Source that will contain brushing sound
 
 
     void Update()
@@ -28,7 +31,6 @@ public class Toothbrush_interact : InteractBase
         if (timer >= brushDuration)
         {
             // When timer reaches 0, stops brushing and give score
-            brushing = false;
             countDownDone = false;
             EndBrushing();
 
@@ -81,12 +83,22 @@ public class Toothbrush_interact : InteractBase
             {
                 emission.enabled = true;
                 emission.rateOverTime = 20f;
+                StartCoroutine(FadeVolume(brushingAudioSource.volume, 0.5f, 0.5f));
             }
             else
             {
                 emission.rateOverTime = 0f;
+                StartCoroutine(FadeVolume(brushingAudioSource.volume, 0f, 0.5f));
             }
 
+        }
+
+        if (!Input.GetMouseButtonDown(0) && !Input.GetMouseButton(0))
+        {
+            ParticleSystem ps = instanceOfObject.GetComponentInChildren<ParticleSystem>();
+            var emission = ps.emission;
+            emission.rateOverTime = 0f;
+            StartCoroutine(FadeVolume(brushingAudioSource.volume, 0f, 0.5f));
         }
 
     }
@@ -95,6 +107,13 @@ public class Toothbrush_interact : InteractBase
 
     public override void Interact()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            PlayToothbrushDialogue();
+            Disappear_Key();
+            PlayerPrefs.SetInt("didIBrushToday", 1);
+        }
+
 
         if (areWeInteracting == false && canInteract == true && PlayerPrefs.GetInt("didIBrushToday") == 0)
         {
@@ -118,7 +137,6 @@ public class Toothbrush_interact : InteractBase
 
     public void StartBrushing()
     {
-        brushing = true;
         timer = 0f;
 
         // Make toothbrush appear, 
@@ -151,6 +169,14 @@ public class Toothbrush_interact : InteractBase
         // Apparently the cursor is needed to track mouse movement so I had to enabled it before
         Cursor.lockState = CursorLockMode.Locked;
 
+        // Show stars of completion! (The Complete Objective script turns it back to 0)
+        PlayerPrefs.SetInt("objectiveCompleted", 1);
+
+        // Play Completion Sound
+        SoundManager.PlayFXSound(AudioFXSounds.CompleteJob);
+
+        // Play Dialogue
+        PlayToothbrushDialogue();
     }
 
     public override void Appear_Key()
@@ -176,6 +202,75 @@ public class Toothbrush_interact : InteractBase
     {
         yield return new WaitForSeconds(3);
         countDownDone = true;
+        brushingAudioSource.Play();
+    }
+
+    IEnumerator FadeVolume(float from, float to, float duration)
+    {
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float t = Mathf.Clamp01(time / duration);
+            brushingAudioSource.volume = Mathf.Lerp(from, to, t);
+            yield return null;
+        }
+        brushingAudioSource.volume = to;
+    }
+
+    void PlayToothbrushDialogue()
+    {
+        // Autumn Dialogue
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            if (PlayerPrefs.GetInt("Gender") == 0)
+            {
+                SoundManager.PlayDialogue(AudioDialogue.AutumnToothBrushMale);
+            }
+            else
+            {
+                SoundManager.PlayDialogue(AudioDialogue.AutumnToothBrushFemale);
+            }
+        }
+
+        // Winter Dialogue
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if (PlayerPrefs.GetInt("Gender") == 0)
+            {
+                SoundManager.PlayDialogue(AudioDialogue.WinterToothMale);
+            }
+            else
+            {
+                SoundManager.PlayDialogue(AudioDialogue.WinterToothFemale);
+            }
+        }
+
+        // Spring Dialogue
+        if (SceneManager.GetActiveScene().buildIndex == 3)
+        {
+            if (PlayerPrefs.GetInt("Gender") == 0)
+            {
+                SoundManager.PlayDialogue(AudioDialogue.SpringToothMale);
+            }
+            else
+            {
+                SoundManager.PlayDialogue(AudioDialogue.SpringToothFemale);
+            }
+        }
+
+        // Summer Dialogue
+        if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            if (PlayerPrefs.GetInt("Gender") == 0)
+            {
+                SoundManager.PlayDialogue(AudioDialogue.SummerToothMale);
+            }
+            else
+            {
+                SoundManager.PlayDialogue(AudioDialogue.SummerToothFemale);
+            }
+        }
     }
 
 }

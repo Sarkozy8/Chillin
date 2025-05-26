@@ -74,6 +74,8 @@ public class Book_Rotate : InteractBase
 
             if (Input.GetKeyDown(KeyCode.E))    // Deinteract object logic
             {
+                SoundManager.PlayFXSound(AudioFXSounds.ThrowBook);
+
                 Destroy(instanceOfObject);
                 player.cameraCanMove = true;
                 player.playerCanMove = true;
@@ -104,9 +106,13 @@ public class Book_Rotate : InteractBase
     {
         if (areWeInteracting == false && canInteract == true)
         {
+            SoundManager.PlayFXSound(AudioFXSounds.PickupBook);
+
             Debug.Log("Interact with Book");
 
             instanceOfObject = Instantiate(bookObject, new Vector3(0, 0, 0), baseRotationObject, inspectTransform); // Make item appear
+            Debug.Log("Book Object Name: " + bookObject.name);
+
             instanceOfObject.transform.localPosition = new Vector3(0, 0, 0);    //Position the item properly in front of player
 
             areWeInteracting = true;         //Enables interacting logic
@@ -120,6 +126,33 @@ public class Book_Rotate : InteractBase
             dof.enabled.Override(true);
 
             textForInteracts.text = "Exit";
+
+            // Dialogue Audio alchemist
+            if (bookObject.name == "Book14 Inspect")
+            {
+                if (PlayerPrefs.GetInt("Gender") == 0)
+                {
+                    SoundManager.PlayDialogue(AudioDialogue.BookAlchemistMale);
+                }
+                else
+                {
+                    SoundManager.PlayDialogue(AudioDialogue.BookAlchemistFemale);
+                }
+
+            }
+            // Dialogue Audio Space
+            else
+            {
+                if (PlayerPrefs.GetInt("Gender") == 0)
+                {
+                    SoundManager.PlayDialogue(AudioDialogue.BookSpaceMale);
+                }
+                else
+                {
+                    SoundManager.PlayDialogue(AudioDialogue.BookSpaceFemale);
+                }
+            }
+
         }
     }
 

@@ -6,7 +6,7 @@ public class GoAnimalSighting : InteractBase
 {
     public override void Appear_Key()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1 && PlayerPrefs.GetInt("enoughChilling") == 1)
         {
             Debug.Log("Interact Key Appear");
             textForInteracts.text = "Go Animal Sighting!";
@@ -17,7 +17,7 @@ public class GoAnimalSighting : InteractBase
 
     public override void Disappear_Key()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1 && PlayerPrefs.GetInt("enoughChilling") == 1)
         {
             Debug.Log("Interact Key Dissapear");
             canvasAnimator.SetBool("showKey", false);
@@ -26,7 +26,7 @@ public class GoAnimalSighting : InteractBase
 
     public override void Interact()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1 && PlayerPrefs.GetInt("enoughChilling") == 1)
         {
             StartCoroutine(LoadAnimalSighting());
         }

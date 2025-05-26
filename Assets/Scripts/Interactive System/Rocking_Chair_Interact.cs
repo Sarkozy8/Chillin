@@ -61,22 +61,32 @@ public class Rocking_Chair_Interact : InteractBase
 
     public override void Appear_Key()
     {
-        Debug.Log("Interact Key Appear");
-        textForInteracts.text = "Chill";
-        canvasAnimator.SetBool("showKey", true);
+        if (PlayerPrefs.GetInt("didIBrushToday") == 1)
+        {
+            Debug.Log("Interact Key Appear");
+            textForInteracts.text = "Chill";
+            canvasAnimator.SetBool("showKey", true);
+        }
+
     }
 
     public override void Disappear_Key()
     {
-        Debug.Log("Interact Key Dissapear");
-        canvasAnimator.SetBool("showKey", false);
+        if (PlayerPrefs.GetInt("didIBrushToday") == 1)
+        {
+            Debug.Log("Interact Key Dissapear");
+            canvasAnimator.SetBool("showKey", false);
+        }
     }
 
     public override void Interact()
     {
         // Avoid getting stuck in interacting an object and doesnt work in autumn (video transition)
-        if (areWeInteracting == false && canInteract == true && SceneManager.GetActiveScene().buildIndex != 0)
+        if (areWeInteracting == false && canInteract == true && SceneManager.GetActiveScene().buildIndex != 0 && PlayerPrefs.GetInt("didIBrushToday") == 1)
         {
+            SoundManager.PlayFXSound(AudioFXSounds.RockingChair);
+
+            RadioStaysOnAfterTransition.PlayRadio();
 
             Debug.Log("Interact with Rocking Chair");
             player.cameraCanMove = false;  // Stop player from moving
@@ -95,14 +105,17 @@ public class Rocking_Chair_Interact : InteractBase
             StartCoroutine(DisableChairRendererAndPLayMusic());
             Disappear_Key();
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 0) // Lets you do the video transition in Autumn
+        else if (SceneManager.GetActiveScene().buildIndex == 0 && PlayerPrefs.GetInt("didIBrushToday") == 1) // Lets you do the video transition in Autumn
         {
 
             // Used the sme blackoutWakeUp for fade in transition for video
             StartCoroutine(DoTransition());
+
             canvasAnimator.SetTrigger("fadeIn");
 
+            RadioStaysOnAfterTransition.PlayRadio();
         }
+
     }
 
     IEnumerator DoTransition()
@@ -112,6 +125,10 @@ public class Rocking_Chair_Interact : InteractBase
         // Play video
         videoPlayerTranstion.enabled = true;
         videoPlayerTranstion.Play();
+
+        player.cameraCanMove = false;  // Stop player from moving
+        player.playerCanMove = false;
+        player.enableHeadBob = false;
     }
 
     IEnumerator DisableChairRendererAndPLayMusic()

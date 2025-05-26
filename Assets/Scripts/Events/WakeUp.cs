@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class WakeUp : MonoBehaviour
 {
+    /// <summary>
+    /// There is a prefab for this and it lets you show the player waking up.
+    /// You need to position the player on the side of the bed for this to work.
+    /// </summary>
+
+
     private bool toggleWakeUp = false;
     public Animator playerAnimator;
     public Animator canvasAnimator;
