@@ -83,7 +83,7 @@ public class FishingMovementAndCasting : MonoBehaviour
 
         // Clamp the angles
         rotationX = Mathf.Clamp(rotationX, -20f, 10f);
-        rotationY = Mathf.Clamp(rotationY, -53f, 0f);
+        rotationY = Mathf.Clamp(rotationY, -90f, 0f);
 
         transform.rotation = Quaternion.Euler(rotationX, rotationY, 0f);
 

@@ -109,7 +109,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         // Noticed that I needed to put the main menu in scene 0 but too late for that so when the game launches, it will jump the main menu
-        if (!hasLaunched)
+        if (!hasLaunched && !Application.isEditor)
         {
             hasLaunched = true;
             SceneManager.LoadScene(6);
