@@ -17,3 +17,5 @@
 
 # Ignore git files in the Library folder
 /Library/
+Assets/_ThirdPartyAssets/Scripts/PlayerPrefsEditor/CHANGELOG.md
+Assets/_ThirdPartyAssets/Scripts/PlayerPrefsEditor/README.md
