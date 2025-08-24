@@ -53,7 +53,6 @@ public class Rocking_Chair_Interact : InteractBase
 
                 playerAnimator.enabled = false;
 
-                // *****Deactivate music******
             }
         }
 
@@ -102,7 +101,7 @@ public class Rocking_Chair_Interact : InteractBase
 
             playerAnimator.SetBool("interactWithRockingChair", true);
 
-            StartCoroutine(DisableChairRendererAndPLayMusic());
+            StartCoroutine(DisableChairRenderer());
             Disappear_Key();
         }
         else if (SceneManager.GetActiveScene().buildIndex == 0 && PlayerPrefs.GetInt("didIBrushToday") == 1) // Lets you do the video transition in Autumn
@@ -131,7 +130,7 @@ public class Rocking_Chair_Interact : InteractBase
         player.enableHeadBob = false;
     }
 
-    IEnumerator DisableChairRendererAndPLayMusic()
+    IEnumerator DisableChairRenderer()
     {
         // It is needed to deactivate chair renderer since it clips with camera when using
 
@@ -140,7 +139,6 @@ public class Rocking_Chair_Interact : InteractBase
         chairRender.enabled = false;
 
         areWeInteracting2 = true;
-        // *****and play music*****
 
     }
 

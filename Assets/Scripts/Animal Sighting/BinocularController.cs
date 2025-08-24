@@ -1,11 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// This controls the player camera to look around and zoom in to find the deers. It also shoots rays to try and find the deer.
+/// </summary>
 public class BinocularController : MonoBehaviour
 {
-    /// <summary>
-    /// This controls the player camera to lok around and zoom in to find the deers. It also shoots rays to try and find the deer.
-    /// </summary>
-
 
     public float mouseSensitivity = 100f;
     public float rotationX = 0f;
